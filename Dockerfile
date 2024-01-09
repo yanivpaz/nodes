@@ -1,4 +1,4 @@
-FROM node:18-alpine AS build
+FROM node:18.15.0-alpine  AS build
 WORKDIR /tmp
 
 ARG VITE_API_URI
@@ -14,7 +14,7 @@ RUN pnpm build
 
 
 # Stage 2 - serve
-FROM nginx:alpine
+FROM  nginx:1.25-alpine3.18
 COPY --from=build /tmp
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
